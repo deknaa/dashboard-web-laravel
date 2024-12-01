@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard/user', function () {
     return view('users.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'userRole'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
