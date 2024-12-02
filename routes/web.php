@@ -2,15 +2,25 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard/user', function () {
-    return view('users.index');
-})->middleware(['auth', 'verified', 'userRole'])->name('dashboard');
+// Route untuk users (mahasiswa)
+Route::middleware('auth', 'userRole', 'verified')->group(function () {
+    Route::get('/dashboard/user', [UserController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/transactions/create', [TransactionController::class, 'index'])->name('transactions.create');
+    Route::get('/dashboard/transactions/view', [TransactionController::class, 'historyTransactions'])->name('transactions.history');
+});
+
+// Route untuk users (admin)
+Route::middleware('auth', 'adminRole')->group(function () {
+    Route::get('/dashboard/admin', [AdminController::class, 'index']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,5 +29,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('/dashboard/admin', [AdminController::class, 'index'])->middleware(['auth', 'adminRole']);
