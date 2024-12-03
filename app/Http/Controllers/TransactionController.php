@@ -30,8 +30,6 @@ class TransactionController extends Controller
     // detail per transaksi
     public function show(Transaction $transaction)
     {
-        $user = Auth::user();
-
         $transaction->load('ruangKelas', 'kendaraan');
         return view('Transactions.users.details', compact('transaction'));
     }

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RuangKelasController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Kendaraan;
@@ -24,7 +26,11 @@ Route::middleware('auth', 'userRole', 'verified')->group(function () {
 
 // Route untuk users (admin)
 Route::middleware('auth', 'adminRole')->group(function () {
-    Route::get('/dashboard/admin', [AdminController::class, 'index']);
+    Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
+    // CRUD untuk Ruang Kelas
+    Route::resource('ruangkelas', RuangKelasController::class);
+    // CRUD untuk Kendaraan
+    Route::resource('kendaraan', KendaraanController::class);
 });
 
 Route::middleware('auth')->group(function () {
