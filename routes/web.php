@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Models\Kendaraan;
+use App\Models\RuangKelas;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,7 +17,8 @@ Route::get('/', function () {
 // Route untuk users (mahasiswa)
 Route::middleware('auth', 'userRole', 'verified')->group(function () {
     Route::get('/dashboard/user', [UserController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/transactions/create', [TransactionController::class, 'index'])->name('transactions.create');
+    // Route::get('/dashboard/transactions/create', [TransactionController::class, 'index'])->name('transactions.create');
+    Route::resource('transactions', TransactionController::class);
     Route::get('/dashboard/transactions/view', [TransactionController::class, 'historyTransactions'])->name('transactions.history');
 });
 

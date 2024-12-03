@@ -13,14 +13,21 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->enum('jenis_transaksi', ['sewa_ruangan', 'pinjam_kendaraan']);
+            $table->enum('jenis_transaksi', ['ruang_kelas', 'kendaraan']);
             $table->string('catatan')->nullable(); 
             $table->string('bukti_pembayaran'); 
-            $table->dateTime('waktu_awal')->nullable(); 
-            $table->dateTime('waktu_akhir')->nullable(); 
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // relasi ke tabel user
+            $table->dateTime('waktu_awal'); 
+            $table->dateTime('waktu_akhir'); 
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('ruang_kelas_id')->nullable();
+            $table->unsignedBigInteger('kendaraan_id')->nullable();
             $table->enum('status', ['dalam_proses', 'selesai', 'ditolak'])->default('dalam_proses');
             $table->timestamps();
+
+            // Relasi ke tabel users dan ruang kelas dan kendaraan
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('ruang_kelas_id')->references('id')->on('ruangkelas')->onDelete('cascade');
+            $table->foreign('kendaraan_id')->references('id')->on('kendaraan')->onDelete('cascade');
         });
     }
  

@@ -52,17 +52,22 @@
                                     {{ $transaction->id }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    @if ($transaction->jenis_transaksi == 'sewa_ruangan')
-                                        Sewa Ruangan
+                                    @if ($transaction->jenis_transaksi == 'ruang_kelas')
+                                        <p>Sewa Ruangan</p>
                                     @else
-                                        Sewa Kendaraan
+                                        <p>Sewa Kendaraan</p>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     Ini Product
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $transaction->bukti_pembayaran }}
+                                    @if ($transaction->bukti_pembayaran)
+                                        <img src="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
+                                            alt="Bukti Pembayaran" class="w-24 h-auto">
+                                    @else
+                                        <p>Bukti pembayaran belum diunggah.</p>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $transaction->waktu_awal }}

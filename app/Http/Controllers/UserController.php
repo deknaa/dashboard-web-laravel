@@ -14,12 +14,19 @@ class UserController extends Controller
 
         // transaksi 
         $user = Auth::user();
-        // $pendingTransaction = Transaction::where('user_id', $user->id)->where('status', 'dalam_proses')->count();
         $totalTransaction = Transaction::where('user_id', $user->id)->whereNotNull('id')->count();
         $transactionUser = Transaction::where('user_id', $user->id)->whereNotNull('id')->get();
 
         $totalAndPending = [$totalTransaction, $transactionUser->count()];
 
-        return view('users.index', compact('cardTittle', 'transactionUser', 'totalAndPending'));
+        // Ambil semua transaksi dengan nama ruang kelas dan kendaraan
+        $transactions = Transaction::with('ruangKelas', 'kendaraan')->paginate(5);
+
+        foreach ($transactions as $transaction) {
+            echo "Nama Ruang Kelas: " . optional($transaction->ruangKelas)->nama_ruangan;
+            echo "Nama Kendaraan: " . optional($transaction->kendaraan)->nama_kendaraan;
+        }
+
+        return view('users.index', compact('cardTittle', 'transactionUser', 'totalAndPending', 'transactions'));
     }
 }
