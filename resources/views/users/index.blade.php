@@ -88,7 +88,7 @@
                                         <img src="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
                                             alt="Bukti Pembayaran" class="w-24 h-auto">
                                     @else
-                                        <p>Bukti pembayaran belum diunggah.</p>
+                                        <p>Bukti pembayaran/Surat belum diunggah.</p>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">

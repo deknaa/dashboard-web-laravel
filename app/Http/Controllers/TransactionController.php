@@ -15,8 +15,12 @@ class TransactionController extends Controller
         // transaksi 
         $user = Auth::user();
         // $pendingTransaction = Transaction::where('user_id', $user->id)->where('status', 'dalam_proses')->count();
-        $totalTransaction = Transaction::where('user_id', $user->id)->whereNotNull('id')->count();
-        $transactionUser = Transaction::where('user_id', $user->id)->whereNotNull('id')->get();
+        $totalTransaction = Transaction::where('user_id', $user->id)
+            ->whereNotNull('id')
+            ->count();
+        $transactionUser = Transaction::where('user_id', $user->id)
+            ->whereNotNull('id')
+            ->paginate(5);
         $totalAndPending = [$totalTransaction, $transactionUser->count()];
 
         return view('Transactions.users.show', compact('transactionUser', 'totalAndPending'));

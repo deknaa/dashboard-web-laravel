@@ -59,14 +59,18 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    Ini Product
+                                    @if($transaction->jenis_transaksi == 'ruang_kelas')
+                                        <p>{{ $transaction->ruangKelas->nama_ruangan ?? '-' }}</p>
+                                    @else
+                                        <p>{{ $transaction->kendaraan->nama_kendaraan ?? '-' }}</p>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($transaction->bukti_pembayaran)
                                         <img src="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
                                             alt="Bukti Pembayaran" class="w-24 h-auto">
                                     @else
-                                        <p>Bukti pembayaran belum diunggah.</p>
+                                        <p>Bukti pembayaran/Surat belum diunggah.</p>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
@@ -97,6 +101,11 @@
                     @endif
                 </tbody>
             </table>
+
+            <!-- Pagination Links -->
+            <div class="mt-5">
+                {{ $transactionUser->links() }}
+            </div>
         </div>
     </x-dashboard.sidebar>
 </x-app-layout>
