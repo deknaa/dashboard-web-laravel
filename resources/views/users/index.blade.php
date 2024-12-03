@@ -55,11 +55,14 @@
                         <th scope="col" class="px-6 py-3">
                             Status
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            OPSI
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @if ($transactionUser->count() > 0)
-                        @foreach ($transactions as $transaction)
+                        @foreach ($transactionUser as $transaction)
                             <tr
                                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                 <th scope="row"
@@ -77,7 +80,7 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    @if($transaction->jenis_transaksi == 'ruang_kelas')
+                                    @if ($transaction->jenis_transaksi == 'ruang_kelas')
                                         <p>{{ $transaction->ruangKelas->nama_ruangan ?? '-' }}</p>
                                     @else
                                         <p>{{ $transaction->kendaraan->nama_kendaraan ?? '-' }}</p>
@@ -110,6 +113,47 @@
                                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Ditolak</button>
                                     @endif
                                 </td>
+                                <td class="px-6 py-4">
+                                    {{-- <div class="flex items-center justify-center gap-1">
+                                        <div class="bg-red-700 hover:bg-red-800 rounded w-10 h-10 flex items-center justify-center">
+                                            <a href="{{ route('transactions.edit', $transaction) }}">
+                                                <svg class="w-6 h-6 text-white" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="bg-red-700 hover:bg-red-800 rounded w-10 h-10">
+                                            <form action="{{ route('transactions.destroy', $transaction) }}"
+                                                method="POST" class="block">
+                                                @csrf
+                                                @method('DELETE');
+                                                <button type="submit">
+                                                    <svg
+                                                        class="w-6 h-6 text-white" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div> --}}
+                                    <a href="{{ route('transactions.details', $transaction) }}">
+                                        <div class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 flex items-center gap-1">
+                                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                                <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                            </svg>
+                                            <span>Lihat Detail</span>
+                                        </div>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     @else
@@ -120,8 +164,8 @@
                 </tbody>
             </table>
 
-              {{-- Pagination --}}
-              <div class="d-flex justify-content-center">
+            {{-- Pagination --}}
+            <div class="d-flex justify-content-center">
                 {!! $transactions->links() !!}
             </div>
         </div>

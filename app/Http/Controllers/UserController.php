@@ -15,7 +15,7 @@ class UserController extends Controller
         // transaksi 
         $user = Auth::user();
         $totalTransaction = Transaction::where('user_id', $user->id)->whereNotNull('id')->count();
-        $transactionUser = Transaction::where('user_id', $user->id)->whereNotNull('id')->get();
+        $transactionUser = Transaction::where('user_id', $user->id)->whereNotNull('id')->paginate(5);
 
         $totalAndPending = [$totalTransaction, $transactionUser->count()];
 

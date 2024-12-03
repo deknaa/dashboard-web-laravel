@@ -17,9 +17,9 @@ Route::get('/', function () {
 // Route untuk users (mahasiswa)
 Route::middleware('auth', 'userRole', 'verified')->group(function () {
     Route::get('/dashboard/user', [UserController::class, 'index'])->name('dashboard');
-    // Route::get('/dashboard/transactions/create', [TransactionController::class, 'index'])->name('transactions.create');
+    Route::get('/dashboard/transactions/history', [TransactionController::class, 'historyTransactions'])->name('transactions.history');
+    Route::get('/dashboard/transactions/{transaction}', [TransactionController::class, 'show'])->name('transactions.details');
     Route::resource('transactions', TransactionController::class);
-    Route::get('/dashboard/transactions/view', [TransactionController::class, 'historyTransactions'])->name('transactions.history');
 });
 
 // Route untuk users (admin)

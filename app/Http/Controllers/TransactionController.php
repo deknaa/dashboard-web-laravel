@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
+    // function untuk user melihat history transaksi keseluruhan
     public function historyTransactions()
     {
         // transaksi 
@@ -26,6 +27,16 @@ class TransactionController extends Controller
         return view('Transactions.users.show', compact('transactionUser', 'totalAndPending'));
     }
 
+    // detail per transaksi
+    public function show(Transaction $transaction)
+    {
+        $user = Auth::user();
+
+        $transaction->load('ruangKelas', 'kendaraan');
+        return view('Transactions.users.details', compact('transaction'));
+    }
+
+    // buat transaksi
     public function create()
     {
         $ruangKelas = RuangKelas::all();
@@ -34,6 +45,7 @@ class TransactionController extends Controller
         return view('Transactions.users.create', compact('ruangKelas', 'kendaraan'));
     }
 
+    // simpan hasil transaksi
     public function store(Request $request)
     {
         $request->validate([
