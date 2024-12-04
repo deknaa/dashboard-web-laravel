@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuangKelasController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserDataController;
 use App\Models\Kendaraan;
 use App\Models\RuangKelas;
 use Illuminate\Http\Client\Request;
@@ -31,6 +32,8 @@ Route::middleware('auth', 'adminRole')->group(function () {
     Route::resource('ruangkelas', RuangKelasController::class);
     // CRUD untuk Kendaraan
     Route::resource('kendaraan', KendaraanController::class);
+    // CRUD untuk User
+    Route::resource('users', UserDataController::class);
 });
 
 Route::middleware('auth')->group(function () {
