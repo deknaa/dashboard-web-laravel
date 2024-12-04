@@ -23,7 +23,7 @@
                         class="block mb-2 text-sm font-medium text-slate-400 dark:text-white mt-3">Foto Ruangan</label>
                     <input
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        aria-describedby="gambar_help" id="gambar" type="file" name="gambar" accept="image/*" required>
+                        aria-describedby="gambar_help" id="gambar" type="file" name="gambar" accept="image/*">
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="gambar_help">PNG, JPG
                         (MAX 3MB).</p>
                 </div>

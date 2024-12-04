@@ -2,9 +2,9 @@
     <x-dashboard.sidebar>
         <div class="flex justify-between items-center mt-10">
             <h2 class="font-bold text-2xl">Manajemen kendaraan</h2>
-            <a href="{{ route('ruangkelas.create') }}"
+            <a href="{{ route('kendaraan.create') }}"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah
-                Ruangan</a>
+                Kendaraan</a>
         </div>
 
         <hr class="h-[3px] my-8 bg-gray-200 border-0 dark:bg-gray-700 w-full">
@@ -130,7 +130,7 @@
                         @endforeach
                     @else
                         <tr class="px-6 py-4">
-                            <td>Anda belum melakukan transaksi Apapun!</td>
+                            <td>Tidak ada data kendaraan!</td>
                         </tr>
                     @endif
                 </tbody>

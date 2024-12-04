@@ -32,16 +32,18 @@ class KendaraanController extends Controller
     {
         $validated = $request->validate([
             'nama_kendaraan' => 'required|string|max:255',
-            'jenis_kendaraan' => 'required|string',
+            'jenis_kendaraan' => 'required|in:mobil,motor',
+            'gambar' => 'nullable|image|max:3072',
             'no_polisi' => 'required|string|unique:kendaraan,no_polisi',
-            'tahun_kendaraan' => 'required|integer',
+            'tahun_kendaraan' => 'required|string',
             'harga_sewa' => 'required|numeric',
-            'status' => 'required|in:tersedia,tidak_tersedia',
-            'gambar' => 'nullable|image|max:2048',
+            'status' => 'required|in:active,not_active,disewa',
         ]);
 
+        // Upload gambar jika ada
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar', 'public')->store('kendaraan');
+            $imagePath = $request->file('gambar')->store('kendaraan', 'public');
+            $validated['gambar'] = $imagePath;
         }
 
         Kendaraan::create($validated);
