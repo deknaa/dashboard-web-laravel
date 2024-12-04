@@ -2,9 +2,9 @@
     <x-dashboard.sidebar>
         <h1 class="font-bold text-3xl">Dashboard</h1>
         @php
-            $cardValues = [$jumlahPending, $jumlahSelesai, $totalSelesai, $totalUser];
+            $cardValues = [$jumlahPending, $jumlahSelesai, $totalTransaksi, $totalUser];
         @endphp
-        <div class=" w-full mt-5 grid grid-cols-4 gap-4 items-center">
+        <div class=" w-full mt-5 grid grid-cols-1 gap-4 md:grid-cols-4 items-center">
             @foreach ($cardTittle as $index => $tittle)    
             <div class="bg-white rounded-lg shadow-lg p-4">
                 <div class="flex justify-between gap-8">
@@ -174,9 +174,9 @@
             </table>
 
             {{-- Pagination --}}
-            {{-- <div class="d-flex justify-content-center">
-                {!! $transactions->links() !!}
-            </div> --}}
+            <div class="d-flex justify-content-center">
+                {!! $transactionUser->links() !!}
+            </div>
         </div>
     </x-dashboard.sidebar>
 </x-app-layout>

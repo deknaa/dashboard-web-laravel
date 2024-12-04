@@ -10,16 +10,16 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $cardTittle = ['Transaksi Pending', 'Transaksi Selesai', 'Total Selesai', 'Total User'];
-        $transactionUser = Transaction::all();
+        $cardTittle = ['Transaksi Pending', 'Transaksi Selesai', 'Total Transaksi', 'Total User'];
+        $transactionUser = Transaction::paginate(5);
 
         // Menghitung data yang dibutuhkan
         $jumlahPending = Transaction::where('status', 'dalam_proses')->count();
         $jumlahSelesai = Transaction::where('status', 'selesai')->count();
-        $totalSelesai = Transaction::whereIn('status', ['dalam_proses', 'selesai', 'ditolak'])->sum('total_transaksi');
+        $totalTransaksi = Transaction::whereIn('status', ['dalam_proses', 'selesai', 'ditolak'])->count();
         $totalUser = User::count();
 
-        return view('admin.index', compact('cardTittle', 'jumlahPending', 'jumlahSelesai', 'totalSelesai', 'totalUser', 'transactionUser'));
+        return view('admin.index', compact('cardTittle', 'jumlahPending', 'jumlahSelesai', 'totalTransaksi', 'totalUser', 'transactionUser'));
     }
 
     public function show($id)
@@ -29,11 +29,6 @@ class AdminController extends Controller
 
         // Ambil semua transaksi dengan nama ruang kelas dan kendaraan
         $transactions = Transaction::with('ruangKelas', 'kendaraan')->paginate(5);
-
-        foreach ($transactions as $item) {
-            echo "Nama Ruang Kelas: " . optional($item->ruangKelas)->nama_ruangan;
-            echo "Nama Kendaraan: " . optional($item->kendaraan)->nama_kendaraan;
-        }
 
         return view('Transactions.admin.show', compact('transaksi', 'transactions'));
     }
@@ -65,7 +60,7 @@ class AdminController extends Controller
     }
 
     public function userTransactions(){
-        $transactionUser = Transaction::all();
+        $transactionUser = Transaction::paginate(5);
         return view('Transactions.admin.userTransactions', compact('transactionUser'));
     }
 }

@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-dashboard.sidebar>
-        <h1 class="font-bold text-3xl">Dashboard</h1>
         <div class="flex justify-between items-center mt-10">
             <h2 class="font-bold text-2xl">Transaksi Terbaru</h2>
         </div>
@@ -127,7 +126,7 @@
                                                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         </svg>
                                     </a>
-                                    <a href="{{ route('transaction.edit', $transaction->id) }}"
+                                    {{-- <a href="{{ route('transaction.edit', $transaction->id) }}"
                                         class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-1 px-2 rounded"><svg
                                             class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -150,7 +149,7 @@
                                                     d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                             </svg>
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </tr>
                         @endforeach
@@ -163,9 +162,9 @@
             </table>
 
             {{-- Pagination --}}
-            {{-- <div class="d-flex justify-content-center">
-                {!! $transactions->links() !!}
-            </div> --}}
+            <div class="d-flex justify-content-center">
+                {!! $transactionUser->links() !!}
+            </div>
         </div>
     </x-dashboard.sidebar>
 </x-app-layout>
