@@ -28,10 +28,19 @@ class TransactionController extends Controller
     }
 
     // detail per transaksi
-    public function show(Transaction $transaction)
+    public function show($id)
     {
-        $transaction->load('ruangKelas', 'kendaraan');
-        return view('Transactions.users.details', compact('transaction'));
+        // Menampilkan detail transaksi berdasarkan ID
+        $transaksi = Transaction::findOrFail($id);
+
+        // Ambil semua transaksi dengan nama ruang kelas dan kendaraan
+        $transactions = Transaction::with('ruangKelas', 'kendaraan')->paginate(5);
+
+        foreach ($transactions as $item) {
+            echo "Nama Ruang Kelas: " . optional($item->ruangKelas)->nama_ruangan;
+            echo "Nama Kendaraan: " . optional($item->kendaraan)->nama_kendaraan;
+        }
+        return view('Transactions.users.details', compact('transactions', 'transaksi'));
     }
 
     // buat transaksi
@@ -76,7 +85,7 @@ class TransactionController extends Controller
     
         Transaction::create($transactionData);
     
-        return redirect()->route('transactions.create')->with('success', 'Transaksi berhasil dibuat.');
+        return redirect()->route('dashboard')->with('success', 'Transaksi berhasil dibuat.');
     }
 
     public function edit(Transaction $transaction)

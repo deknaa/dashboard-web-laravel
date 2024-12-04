@@ -10,23 +10,30 @@ class UserController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+       // Judul kartu
         $cardTittle = ['Transaksi Pending', 'Total Transaksi'];
 
-        // transaksi 
-        $user = Auth::user();
-        $totalTransaction = Transaction::where('user_id', $user->id)->whereNotNull('id')->count();
-        $transactionUser = Transaction::where('user_id', $user->id)->whereNotNull('id')->paginate(5);
+        // Total transaksi user (semua status)
+        $totalTransaction = Transaction::where('user_id', $user->id)->count();
 
-        $totalAndPending = [$totalTransaction, $transactionUser->count()];
+        // Transaksi pending
+        $pendingTransaction = Transaction::where('user_id', $user->id)->where('status', 'dalam_proses')->count();
 
-        // Ambil semua transaksi dengan nama ruang kelas dan kendaraan
+        // Transaksi user ditampilkan dalam bentuk tabel
+        $transactionUser = Transaction::where('user_id', $user->id)->paginate(5);
+
+        // Data transaksi (jika butuh detailnya di tempat lain)
         $transactions = Transaction::with('ruangKelas', 'kendaraan')->paginate(5);
 
-        foreach ($transactions as $transaction) {
-            echo "Nama Ruang Kelas: " . optional($transaction->ruangKelas)->nama_ruangan;
-            echo "Nama Kendaraan: " . optional($transaction->kendaraan)->nama_kendaraan;
-        }
+        // Data yang akan ditampilkan dalam kartu
+        $cardData = [$pendingTransaction, $totalTransaction];;
 
-        return view('users.index', compact('cardTittle', 'transactionUser', 'totalAndPending', 'transactions'));
+        // foreach ($transactions as $transaction) {
+        //     echo "Nama Ruang Kelas: " . optional($transaction->ruangKelas)->nama_ruangan;
+        //     echo "Nama Kendaraan: " . optional($transaction->kendaraan)->nama_kendaraan;
+        // }
+
+        return view('users.index', compact('cardTittle', 'cardData', 'transactionUser', 'transactions'));
     }
 }

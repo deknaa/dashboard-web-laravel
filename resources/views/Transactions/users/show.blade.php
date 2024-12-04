@@ -67,8 +67,27 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($transaction->bukti_pembayaran)
-                                        <img src="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
-                                            alt="Bukti Pembayaran" class="w-24 h-auto">
+                                        @php
+                                            // Dapatkan ekstensi file
+                                            $extension = pathinfo(
+                                                storage_path('app/public/' . $transaction->bukti_pembayaran),
+                                                PATHINFO_EXTENSION,
+                                            );
+                                        @endphp
+
+                                        @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                            {{-- Jika file berupa gambar --}}
+                                            <img src="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
+                                                alt="Bukti Pembayaran" class="w-24 h-auto">
+                                        @elseif ($extension === 'pdf')
+                                            {{-- Jika file berupa PDF --}}
+                                            <a href="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
+                                                target="_blank" class="text-blue-500 underline">
+                                                Lihat Bukti Pembayaran (PDF)
+                                            </a>
+                                        @else
+                                            <p>Format bukti pembayaran tidak dikenali.</p>
+                                        @endif
                                     @else
                                         <p>Bukti pembayaran/Surat belum diunggah.</p>
                                     @endif

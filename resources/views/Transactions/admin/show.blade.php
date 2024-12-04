@@ -74,33 +74,12 @@
                 <label for="bukti_pembayaran"
                     class="block mb-2 text-sm font-medium text-slate-400 dark:text-white mt-3">Upload Bukti
                     Pembayaran/Surat Peminjaman</label>
-                    <td class="px-6 py-4">
-                        @if ($transaksi->bukti_pembayaran)
-                            @php
-                                // Dapatkan ekstensi file
-                                $extension = pathinfo(
-                                    storage_path('app/public/' . $transaksi->bukti_pembayaran),
-                                    PATHINFO_EXTENSION,
-                                );
-                            @endphp
-
-                            @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                {{-- Jika file berupa gambar --}}
-                                <img src="{{ asset('storage/' . $transaksi->bukti_pembayaran) }}"
-                                    alt="Bukti Pembayaran" class="w-24 h-auto">
-                            @elseif ($extension === 'pdf')
-                                {{-- Jika file berupa PDF --}}
-                                <a href="{{ asset('storage/' . $transaksi->bukti_pembayaran) }}"
-                                    target="_blank" class="text-blue-500 underline">
-                                    Lihat Bukti Pembayaran (PDF)
-                                </a>
-                            @else
-                                <p>Format bukti pembayaran tidak dikenali.</p>
-                            @endif
-                        @else
-                            <p>Bukti pembayaran/Surat belum diunggah.</p>
-                        @endif
-                    </td>
+                @if ($transaksi->bukti_pembayaran)
+                    <img src="{{ asset('storage/' . $transaksi->bukti_pembayaran) }}" alt="Bukti Pembayaran"
+                        class="w-24 h-auto">
+                @else
+                    <p>Bukti pembayaran/Surat belum diunggah.</p>
+                @endif
             </div>
             <div>
                 <label for="catatan"
@@ -110,11 +89,23 @@
                     disabled>{{ $transaksi->catatan }}</textarea>
             </div>
         </div>
-        <h2 class="font-bold text-2xl mt-3">Balasan Admin</h2>
+        <h2 class="font-bold text-2xl mt-3">Proses Transaksi</h2>
         <div class="bg-white grid grid-cols-1 w-full h-auto mt-5 rounded-md p-5">
-            <textarea id="alasan_tolak" rows="5"
-                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Balasan Admin" name="alasan_tolak" disabled>{{ $transaksi->alasan_tolak }}</textarea>
-        </div>
+            <div>
+                <form action="{{ route('admin.transaction.reject', $transaksi->id) }}" method="POST" class="mb-3">
+                    @csrf
+                    <textarea id="alasan_tolak" rows="5"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Masukan Pesan Untuk User" name="alasan_tolak"></textarea>
+                    <div class="flex gap-2 mt-3">
+                        <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded">Tolak</button>
+                        <form action="{{ route('admin.transaction.process', $transaksi->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Proses</button>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>        
     </x-dashboard.sidebar>
 </x-app-layout>

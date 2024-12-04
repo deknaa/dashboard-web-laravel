@@ -1,32 +1,9 @@
 <x-app-layout>
     <x-dashboard.sidebar>
         <h1 class="font-bold text-3xl">Dashboard</h1>
-        <div class=" w-full mt-5 grid grid-cols-4 gap-4 items-center">
-            @for ($i = 0; $i < count($cardTittle); $i++)
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <div class="flex justify-between gap-8">
-                        <h2>{{ $cardTittle[$i] }}</h2>
-                        <div class="bg-yellow-300 rounded-2xl w-10 h-10 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2" />
-                            </svg>
-                        </div>
-                    </div>
-                    <p class="text-4xl mb-7">{{ $cardData[$i] }}</p>
-                </div>
-            @endfor
-        </div>
         <div class="flex justify-between items-center mt-10">
             <h2 class="font-bold text-2xl">Transaksi Terbaru</h2>
-            <a href="{{ route('transactions.create') }}"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Buat
-                Transaksi</a>
         </div>
-
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -36,6 +13,9 @@
                         </th>
                         <th scope="col" class="px-6 py-3">
                             No Transaksi
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Nama
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Tipe Transaksi
@@ -56,7 +36,7 @@
                             Status
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            OPSI
+                            AKSI
                         </th>
                     </tr>
                 </thead>
@@ -71,6 +51,9 @@
                                 </th>
                                 <td class="px-6 py-4">
                                     {{ $transaction->id }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $transaction->user->nama }}
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($transaction->jenis_transaksi == 'ruang_kelas')
@@ -122,8 +105,7 @@
                                 <td class="px-6 py-4">
                                     @if ($transaction->status == 'dalam_proses')
                                         <button type="button"
-                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Dalam
-                                            Proses</button>
+                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Pending</button>
                                     @elseif($transaction->status == 'selesai')
                                         <button type="button"
                                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Selesai</button>
@@ -133,35 +115,57 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="{{ route('transactions.details', $transaction) }}">
-                                        <div
-                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 flex items-center gap-1">
-                                            <svg class="w-6 h-6 text-white" aria-hidden="true"
+                                    <div class="grid grid-cols-3 justify-items-center items-center">
+                                    <a href="{{ route('transaction.show', $transaction->id) }}"
+                                        class="bg-green-500 hover:bg-green-600 text-gray-900 py-1 px-2 rounded"><svg
+                                            class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-width="2"
+                                                d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                                            <path stroke="currentColor" stroke-width="2"
+                                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('transaction.edit', $transaction->id) }}"
+                                        class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-1 px-2 rounded"><svg
+                                            class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
+                                        </svg>
+                                    </a>
+                                    <form action="{{ route('transaction.destroy', $transaction->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-gray-900 py-1 px-2 rounded"><svg
+                                                class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-width="2"
-                                                    d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                                <path stroke="currentColor" stroke-width="2"
-                                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                             </svg>
-                                            <span>Lihat Detail</span>
-                                        </div>
-                                    </a>
-                                </td>
+                                        </button>
+                                    </form>
+                                </div>
                             </tr>
                         @endforeach
                     @else
                         <tr class="px-6 py-4">
-                            <td>Anda belum melakukan transaksi Apapun!</td>
+                            <td>Tidak Ada transaksi Apapun!</td>
                         </tr>
                     @endif
                 </tbody>
             </table>
 
             {{-- Pagination --}}
-            <div class="d-flex justify-content-center">
+            {{-- <div class="d-flex justify-content-center">
                 {!! $transactions->links() !!}
-            </div>
+            </div> --}}
         </div>
     </x-dashboard.sidebar>
 </x-app-layout>

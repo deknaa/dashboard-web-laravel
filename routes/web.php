@@ -28,6 +28,10 @@ Route::middleware('auth', 'userRole', 'verified')->group(function () {
 // Route untuk users (admin)
 Route::middleware('auth', 'adminRole')->group(function () {
     Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
+    Route::get('/dashboard/users-transactions/history', [AdminController::class, 'userTransactions'])->name('dashboard.admin.transactions');
+    Route::resource('transaction', AdminController::class);
+    Route::post('transaction/{id}/proses', [AdminController::class, 'process'])->name('admin.transaction.process');
+    Route::post('transaction/{id}/tolak', [AdminController::class, 'reject'])->name('admin.transaction.reject');
     // CRUD untuk Ruang Kelas
     Route::resource('ruangkelas', RuangKelasController::class);
     // CRUD untuk Kendaraan
