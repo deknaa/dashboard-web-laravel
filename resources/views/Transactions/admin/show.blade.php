@@ -95,17 +95,22 @@
                 <form action="{{ route('admin.transaction.reject', $transaksi->id) }}" method="POST" class="mb-3">
                     @csrf
                     <textarea id="alasan_tolak" rows="5"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Masukan Pesan Untuk User" name="alasan_tolak"></textarea>
-                    <div class="flex gap-2 mt-3">
-                        <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded">Tolak</button>
-                        <form action="{{ route('admin.transaction.process', $transaksi->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Proses</button>
-                        </form>
-                    </div>
-                </form>
-            </div>
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Masukan Pesan Untuk User" name="alasan_tolak"></textarea>
+                    @if ($transaksi->status == 'dalam_proses')    
+                        <div class="flex gap-2 mt-3">
+                            <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded">Tolak</button>
+                            <form action="{{ route('admin.transaction.process', $transaksi->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded">Proses</button>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            @else
+                <span></span>
+            @endif
+
         </div>        
     </x-dashboard.sidebar>
 </x-app-layout>

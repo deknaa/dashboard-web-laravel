@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-dashboard.sidebar>
         <h1 class="font-bold text-3xl">Dashboard</h1>
-        <div class=" w-full mt-5 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+        <div class="w-full mt-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-center">
             @for ($i = 0; $i < count($cardTittle); $i++)
                 <div class="bg-white rounded-lg shadow-lg p-4">
-                    <div class="flex justify-between gap-8">
+                    <div class="flex justify-between gap-5">
                         <h2>{{ $cardTittle[$i] }}</h2>
-                        <div class="bg-yellow-300 rounded-2xl w-10 h-10 flex items-center justify-center">
+                        <div class="bg-yellow-300 rounded-2xl w-full h-auto md:w-10 md:h-10 flex items-center justify-center">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207"/>
                               </svg>                              
@@ -22,7 +22,6 @@
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Buat
                 Transaksi</a>
         </div>
-
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

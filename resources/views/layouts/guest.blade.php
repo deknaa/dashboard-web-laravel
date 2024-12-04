@@ -14,12 +14,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[#4880FF] dark:bg-gray-900">
-            <img src="{{ asset('assets/pattern/Shape.png') }}" class=" bg-no-repeat bg-blend-multiply bg-cover absolute w-full h-screen">
+    <body class="font-sans text-gray-900 antialiased overflow-hidden">
+        <div class="p-5 min-h-screen flex items-center justify-center bg-[#4880FF] dark:bg-gray-900 relative">
+
+            <img src="{{ asset('assets/pattern/Shape.png') }}" class="bg-no-repeat bg-blend-multiply bg-cover absolute w-full h-screen object-cover">
+
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden rounded-2xl relative">
                 {{ $slot }}
             </div>
+
         </div>
     </body>
 </html>
