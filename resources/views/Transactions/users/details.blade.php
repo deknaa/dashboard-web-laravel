@@ -58,8 +58,7 @@
                 </div>
             </div>
             <div class="max-w-sm mt-3">
-                <label for="product" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
-                    Transaksi</label>
+                <label for="product" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product</label>
                 @if ($transaksi->jenis_transaksi == 'ruang_kelas')
                     <input type="text" name="product"
                         value="{{ old('product', $transaksi->ruangkelas->nama_ruangan ?? '-') }}" class="rounded"
@@ -84,7 +83,7 @@
                                 );
                             @endphp
 
-                            @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                            @if (in_array($extension, ['jpg', 'jpeg', 'png']))
                                 {{-- Jika file berupa gambar --}}
                                 <img src="{{ asset('storage/' . $transaksi->bukti_pembayaran) }}"
                                     alt="Bukti Pembayaran" class="w-24 h-auto">
@@ -114,7 +113,12 @@
         <div class="bg-white grid grid-cols-1 w-full h-auto mt-5 rounded-md p-5">
             <textarea id="alasan_tolak" rows="5"
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Balasan Admin" name="alasan_tolak" disabled>{{ $transaksi->alasan_tolak }}</textarea>
+                 name="alasan_tolak" disabled>@if ($transaksi->alasan_tolak != null)
+{{ $transaksi->alasan_tolak }}
+                @else
+Belum ada balasan
+                 @endif
+                </textarea>
         </div>
     </x-dashboard.sidebar>
 </x-app-layout>
