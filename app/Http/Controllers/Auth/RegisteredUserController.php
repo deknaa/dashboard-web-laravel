@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'nik' => ['required', 'string', 'max:16'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'no_telp' => ['required', 'string', 'max:9', 'unique:'.User::class],
+            'no_telp' => ['required', 'string', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

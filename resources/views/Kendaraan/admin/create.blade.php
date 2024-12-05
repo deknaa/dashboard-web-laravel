@@ -10,7 +10,7 @@
                 <div class="max-w-sm mt-3">
                     <label for="nama_kendaraan" class="block text-gray-700 font-bold">Nama Kendaraan:</label>
                     <input type="text" id="nama_kendaraan" name="nama_kendaraan" value="{{ old('nama_kendaraan') }}"
-                        class="w-full border-gray-300 rounded-md shadow-sm">
+                        class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
 
                 <div class="max-w-sm mt-3">
@@ -36,25 +36,25 @@
                 <div class="max-w-sm mt-3">
                     <label for="no_polisi" class="block text-gray-700 font-bold">No Polisi:</label>
                     <input type="text" id="no_polisi" name="no_polisi" value="{{ old('no_polisi') }}"
-                        class="w-full border-gray-300 rounded-md shadow-sm">
+                        class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
 
                 <div class="max-w-sm mt-3">
                     <label for="tahun_kendaraan" class="block text-gray-700 font-bold">Tahun Kendaraan:</label>
                     <input type="number" id="tahun_kendaraan" name="tahun_kendaraan" value="{{ old('tahun_kendaraan') }}"
-                        class="w-full border-gray-300 rounded-md shadow-sm">
+                        class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
 
                 <div class="max-w-sm mt-3">
                     <label for="harga_sewa" class="block text-gray-700 font-bold">Harga Sewa:</label>
                     <input type="number" id="harga_sewa" name="harga_sewa" value="{{ old('harga_sewa') }}"
-                        class="w-full border-gray-300 rounded-md shadow-sm">
+                        class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
 
                 <div class="max-w-sm mt-3">
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Status</label>
                     <select id="status" name="status" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="" selected disabled>Pilih Status</option>
                         <option value="active">Active</option>
                         <option value="not_active">Tidak Aktif</option>

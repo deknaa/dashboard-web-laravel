@@ -41,7 +41,7 @@ class AdminController extends Controller
         $transaksi->alasan_tolak = null;
         $transaksi->save();
 
-        return redirect()->route('dashboard.admin')->with('success', 'Transaksi berhasil diproses.');
+        return redirect()->route('dashboard.admin.transactions')->with('success', "Transaksi Pengguna dengan nama {$transaksi->user->nama} berhasil diproses.");
     }
 
     public function reject(Request $request, $id)
@@ -56,7 +56,7 @@ class AdminController extends Controller
         $transaksi->alasan_tolak = $request->alasan_tolak;
         $transaksi->save();
 
-        return redirect()->route('dashboard.admin')->with('success', 'Transaksi berhasil ditolak.');
+        return redirect()->route('dashboard.admin.transactions')->with('success', "Transaksi Pengguna dengan nama {$transaksi->user->nama} berhasil ditolak.");
     }
 
     public function userTransactions(){

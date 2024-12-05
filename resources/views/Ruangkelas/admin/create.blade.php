@@ -10,7 +10,7 @@
                 <div class="max-w-sm mt-3">
                     <label for="nama_ruangan" class="block text-gray-700 font-bold">Nama Ruangan:</label>
                     <input type="text" id="nama_ruangan" name="nama_ruangan" value="{{ old('nama_ruangan') }}"
-                        class="w-full border-gray-300 rounded-md shadow-sm">
+                        class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
 
                 <div class="max-w-sm mt-3">
@@ -26,19 +26,19 @@
                 <div class="max-w-sm mt-3">
                     <label for="lokasi" class="block text-gray-700 font-bold">Lokasi:</label>
                     <input type="text" id="lokasi" name="lokasi" value="{{ old('lokasi') }}"
-                        class="w-full border-gray-300 rounded-md shadow-sm">
+                        class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
 
                 <div class="max-w-sm mt-3">
                     <label for="harga_sewa" class="block text-gray-700 font-bold">Harga Sewa:</label>
                     <input type="number" id="harga_sewa" name="harga_sewa" value="{{ old('harga_sewa') }}"
-                        class="w-full border-gray-300 rounded-md shadow-sm">
+                        class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
 
                 <div class="max-w-sm mt-3">
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Status</label>
                     <select id="status" name="status" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="" selected disabled>Pilih Status</option>
                         <option value="active">Active</option>
                         <option value="not_active">Tidak Aktif</option>

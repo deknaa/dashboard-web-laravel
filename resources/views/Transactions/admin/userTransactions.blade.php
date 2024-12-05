@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-dashboard.sidebar>
         <div class="flex justify-between items-center mt-10">
+            <x-alert-information></x-alert-information>
             <h2 class="font-bold text-2xl">Transaksi Terbaru</h2>
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
