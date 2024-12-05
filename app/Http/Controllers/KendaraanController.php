@@ -48,7 +48,7 @@ class KendaraanController extends Controller
 
         Kendaraan::create($validated);
 
-        return redirect()->route('kendaraan.index')->with('success', 'Kendaraan berhasil ditambahkan.');
+        return redirect()->route('kendaraan.index')->with('success', "Kendaraan dengan nama {$validated["nama_kendaraan"]} berhasil ditambahkan.");
     }
 
     /**
@@ -105,7 +105,7 @@ class KendaraanController extends Controller
 
         $kendaraan->update($validated);
 
-        return redirect()->route('kendaraan.index')->with('success', 'Kendaraan berhasil diperbarui.');
+        return redirect()->route('kendaraan.index')->with('success', "Kendaraan dengan nama {$validated["nama_kendaraan"]} berhasil diperbarui.");
     }
 
     /**
@@ -116,6 +116,6 @@ class KendaraanController extends Controller
         // Cari data berdasarkan ID
         $kendaraan = Kendaraan::findOrFail($id);
         $kendaraan->delete();
-        return redirect()->route('kendaraan.index')->with('success', 'Kendaraan berhasil dihapus.');
+        return redirect()->route('kendaraan.index')->with('success', "Kendaraan dengan nama {$kendaraan->nama_kendaraan} berhasil dihapus.");
     }
 }

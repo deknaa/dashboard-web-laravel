@@ -49,7 +49,7 @@ class UserDataController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Ruang kelas berhasil ditambahkan.');
+        return redirect()->route('users.index')->with('success', "User dengan nama {$request->nama} berhasil ditambahkan.");
     }
 
     /**

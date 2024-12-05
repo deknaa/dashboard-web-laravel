@@ -1,6 +1,9 @@
 <x-app-layout>
     <x-dashboard.sidebar>
-        <h1 class="font-bold text-3xl">Dashboard</h1>
+        <div class="mt-3">
+            <x-alert-information></x-alert-information>
+        </div>
+        <h1 class="font-bold text-3xl mt-3">Dashboard</h1>
         <div class="w-full mt-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-center">
             @for ($i = 0; $i < count($cardTittle); $i++)
                 <div class="bg-white rounded-lg shadow-lg p-4">

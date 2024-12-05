@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-dashboard.sidebar>
+        <x-alert-information></x-alert-information>
         <div class="flex justify-between items-center mt-10">
             <h2 class="font-bold text-2xl">Manajemen User</h2>
             <a href="{{ route('users.create') }}"

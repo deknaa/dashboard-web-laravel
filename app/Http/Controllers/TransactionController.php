@@ -85,7 +85,7 @@ class TransactionController extends Controller
     
         Transaction::create($transactionData);
     
-        return redirect()->route('dashboard')->with('success', 'Transaksi berhasil dibuat.');
+        return redirect()->route('dashboard')->with('success', 'Transaksi baru anda berhasil dibuat.');
     }
 
     public function edit(Transaction $transaction)

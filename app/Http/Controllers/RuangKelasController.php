@@ -46,7 +46,7 @@ class RuangKelasController extends Controller
 
         RuangKelas::create($validated);
 
-        return redirect()->route('ruangkelas.index')->with('success', 'Ruang kelas berhasil ditambahkan.');
+        return redirect()->route('ruangkelas.index')->with('success', "Ruang kelas dengan nama {$validated['nama_ruangan']} berhasil ditambahkan.");
     }
 
     /**
@@ -101,7 +101,7 @@ class RuangKelasController extends Controller
 
         $ruangkelas->update($validated);
 
-        return redirect()->route('ruangkelas.index')->with('success', 'Ruang kelas berhasil diperbarui.');
+        return redirect()->route('ruangkelas.index')->with('success', "Ruang kelas dengan nama {$ruangkelas->nama_ruangan} berhasil diperbarui.");
     }
 
     /**
@@ -112,6 +112,6 @@ class RuangKelasController extends Controller
         // Cari data berdasarkan ID
         $ruangkelas = RuangKelas::findOrFail($id);
         $ruangkelas->delete();
-        return redirect()->route('ruangkelas.index')->with('success', 'Ruang kelas berhasil dihapus.');
+        return redirect()->route('ruangkelas.index')->with('success', "Ruang kelas dengan nama {$ruangkelas->nama_ruangan} berhasil dihapus.");
     }
 }
