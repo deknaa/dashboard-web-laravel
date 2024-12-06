@@ -36,7 +36,7 @@
                     </select>
                 </div>
 
-                <div class="flex gap-5 mt-3">
+                <div class="flex flex-col md:flex-row gap-5 mt-3">
                     <div>
                         <label for="waktu_awal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Awal</label>
                         <input type="datetime-local" id="waktu_awal" name="waktu_awal" class="rounded w-full" required>
