@@ -17,6 +17,7 @@ class Transaction extends Model
         'ruang_kelas_id',
         'kendaraan_id',
         'status',
+        'total_transaksi',
         'alasan_tolak',
     ];
 

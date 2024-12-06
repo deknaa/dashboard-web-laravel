@@ -51,6 +51,9 @@
                             Tanggal Berakhir
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Total Harga
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Status
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -116,6 +119,9 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $transaction->waktu_akhir }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    Rp {{ number_format($transaction->total_transaksi, 0, ',', '.') }}
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($transaction->status == 'dalam_proses')

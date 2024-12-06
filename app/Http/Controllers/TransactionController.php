@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kendaraan;
 use App\Models\RuangKelas;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,6 +62,8 @@ class TransactionController extends Controller
             'waktu_akhir' => 'required|date|after:waktu_awal',
             'bukti_pembayaran' => 'required|file|mimes:png,jpg,jpeg,pdf|max:3072',
             'catatan' => 'nullable|string',
+            'ruang_kelas_id' => 'required_if:jenis_transaksi,ruang_kelas|nullable|exists:ruangkelas,id',
+            'kendaraan_id' => 'required_if:jenis_transaksi,kendaraan|nullable|exists:kendaraan,id',
         ]);
     
         $transactionData = [
@@ -69,16 +72,27 @@ class TransactionController extends Controller
             'waktu_akhir' => $request->waktu_akhir,
             'bukti_pembayaran' => $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public'),
             'catatan' => $request->catatan,
+            'status' => 'dalam_proses',
         ];
+
+        // Hitung durasi dalam jam
+        $waktuAwal = Carbon::parse($request->waktu_awal);
+        $waktuAkhir = Carbon::parse($request->waktu_akhir);
+        $durasi = $waktuAwal->diffInDays($waktuAkhir);
     
+        // Tentukan harga sewa berdasarkan jenis transaksi
         if ($request->jenis_transaksi === 'ruang_kelas') {
+            $ruangKelas = RuangKelas::findOrFail($request->ruang_kelas_id);
             $transactionData['jenis_transaksi'] = 'ruang_kelas';
-            $transactionData['ruang_kelas_id'] = $request->ruang_kelas_id; 
+            $transactionData['ruang_kelas_id'] = $ruangKelas->id;
             $transactionData['kendaraan_id'] = null;
+            $transactionData['total_transaksi'] = $durasi * $ruangKelas->harga_sewa; // Harga * durasi
         } elseif ($request->jenis_transaksi === 'kendaraan') {
+            $kendaraan = Kendaraan::findOrFail($request->kendaraan_id);
             $transactionData['jenis_transaksi'] = 'kendaraan';
-            $transactionData['kendaraan_id'] = $request->kendaraan_id;
+            $transactionData['kendaraan_id'] = $kendaraan->id;
             $transactionData['ruang_kelas_id'] = null;
+            $transactionData['total_transaksi'] = $durasi * $kendaraan->harga_sewa; // Harga * durasi
         }
     
         $transactionData['status'] = 'dalam_proses';

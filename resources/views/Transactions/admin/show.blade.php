@@ -29,7 +29,7 @@
                         <label for="waktu_awal"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Waktu Awal</label>
                         <input type="datetime-local" name="waktu_awal" class="rounded"
-                            value="{{ $transaksi->waktu_awal }}" required>
+                            value="{{ $transaksi->waktu_awal }}" disabled>
                         <span class="ms-3">-</span>
                     </div>
                     <div>
@@ -37,7 +37,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Waktu
                             Akhir</label>
                         <input type="datetime-local" name="waktu_akhir" class="rounded"
-                            value="{{ $transaksi->waktu_akhir }}" required>
+                            value="{{ $transaksi->waktu_akhir }}" disabled>
                     </div>
                 </div>
                 <div class="max-w-sm mt-3">
@@ -57,18 +57,24 @@
                     </div>
                 </div>
             </div>
-            <div class="max-w-sm mt-3">
-                <label for="product" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
-                    Transaksi</label>
-                @if ($transaksi->jenis_transaksi == 'ruang_kelas')
-                    <input type="text" name="product"
-                        value="{{ old('product', $transaksi->ruangkelas->nama_ruangan ?? '-') }}" class="rounded"
-                        disabled>
-                @else
-                    <input type="text" name="product"
-                        value="{{ old('product', $transaksi->kendaraan->nama_kendaraan ?? '-') }}" class="rounded"
-                        disabled>
-                @endif
+            <div class="grid grid-cols-3">
+                <div class="max-w-sm mt-3">
+                    <label for="product" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product</label>
+                    @if ($transaksi->jenis_transaksi == 'ruang_kelas')
+                        <input type="text" name="product"
+                            value="{{ old('product', $transaksi->ruangkelas->nama_ruangan ?? '-') }}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            disabled>
+                    @else
+                        <input type="text" name="product"
+                            value="{{ old('product', $transaksi->kendaraan->nama_kendaraan ?? '-') }}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            disabled>
+                    @endif
+                </div>
+                <div class="max-w-sm mt-3">
+                    <label for="total_harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total Harga</label>
+                    <input type="text" id="total_harga" name="total_harga" readonly 
+                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" value="Rp {{ number_format($transaksi->total_transaksi, 0, ',', '.') }}">
+                </div>
             </div>
             <div class="max-w-sm">
                 <label for="bukti_pembayaran"
