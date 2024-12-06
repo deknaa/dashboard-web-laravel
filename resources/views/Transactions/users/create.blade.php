@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="flex items-center justify-center mt-5">
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-10 py-2.5">Kirim</button>
+                    <button type="button" onclick="confirmSubmit()" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-10 py-2.5">Kirim</button>
                 </div>
             </form>
         </div>
@@ -113,6 +113,21 @@
             waktuAkhir.addEventListener('change', calculateTotalHarga);
             document.getElementById('ruang_kelas_id')?.addEventListener('change', calculateTotalHarga);
             document.getElementById('kendaraan_id')?.addEventListener('change', calculateTotalHarga);
+
+            function confirmSubmit() {
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: 'Pastikan semua data sudah benar sebelum mengirim!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Kirim!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('transactionForm').submit();
+                    }
+                });
+            }
         </script>
     </x-dashboard.sidebar>
 </x-app-layout>

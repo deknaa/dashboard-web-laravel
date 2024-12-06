@@ -47,8 +47,11 @@ class TransactionController extends Controller
     // buat transaksi
     public function create()
     {
-        $ruangKelas = RuangKelas::all();
-        $kendaraan = Kendaraan::all();
+       // Hanya mengambil ruang kelas dengan status "active"
+        $ruangKelas = RuangKelas::where('status', 'active')->get();
+
+        // Hanya mengambil kendaraan dengan status "active"
+        $kendaraan = Kendaraan::where('status', 'active')->get();
 
         return view('Transactions.users.create', compact('ruangKelas', 'kendaraan'));
     }
@@ -87,12 +90,18 @@ class TransactionController extends Controller
             $transactionData['ruang_kelas_id'] = $ruangKelas->id;
             $transactionData['kendaraan_id'] = null;
             $transactionData['total_transaksi'] = $durasi * $ruangKelas->harga_sewa; // Harga * durasi
+
+             // Ubah status Ruang Kelas menjadi "disewa"
+            $ruangKelas->update(['status' => 'disewa']);
         } elseif ($request->jenis_transaksi === 'kendaraan') {
             $kendaraan = Kendaraan::findOrFail($request->kendaraan_id);
             $transactionData['jenis_transaksi'] = 'kendaraan';
             $transactionData['kendaraan_id'] = $kendaraan->id;
             $transactionData['ruang_kelas_id'] = null;
             $transactionData['total_transaksi'] = $durasi * $kendaraan->harga_sewa; // Harga * durasi
+
+             // Ubah status Kendaraan menjadi "disewa"
+            $kendaraan->update(['status' => 'disewa']);
         }
     
         $transactionData['status'] = 'dalam_proses';

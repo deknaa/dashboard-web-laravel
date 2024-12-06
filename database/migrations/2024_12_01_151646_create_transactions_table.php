@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('ruang_kelas_id')->nullable();
             $table->unsignedBigInteger('kendaraan_id')->nullable();
-            $table->enum('status', ['dalam_proses', 'selesai', 'ditolak'])->default('dalam_proses');
+            $table->enum('status', ['dalam_proses', 'selesai', 'ditolak', 'disewa'])->default('dalam_proses');
             $table->integer('total_transaksi')->nullable();
             $table->text('alasan_tolak')->nullable();
             $table->timestamps();

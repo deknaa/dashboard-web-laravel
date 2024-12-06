@@ -111,17 +111,21 @@
                                 <td class="px-6 py-4">
                                     @if ($transaction->status == 'dalam_proses')
                                         <button type="button"
-                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Pending</button>
+                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Dalam Proses</button>
                                     @elseif($transaction->status == 'selesai')
                                         <button type="button"
                                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Selesai</button>
-                                    @else
+                                    @elseif($transaction->status == 'disewa')
                                         <button type="button"
+                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Disewa</button>
+                                    @else
+                                    <button type="button"
                                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Ditolak</button>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="grid grid-cols-3 justify-items-center items-center">
+                                    @if ($transaction->status == 'disewa')
                                     <a href="{{ route('transaction.show', $transaction->id) }}"
                                         class="bg-green-500 hover:bg-green-600 text-gray-900 py-1 px-2 rounded"><svg
                                             class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
@@ -133,7 +137,30 @@
                                                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         </svg>
                                     </a>
-                                </div>
+                                    <form method="POST" action="{{ route('admin.transaction.finish', $transaction->id) }}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
+                                            <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
+                                              </svg>                                              
+                                        </button>
+                                    </form>
+                                @else
+                                <a href="{{ route('transaction.show', $transaction->id) }}"
+                                    class="bg-green-500 hover:bg-green-600 text-gray-900 py-1 px-2 rounded"><svg
+                                        class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-width="2"
+                                            d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                                        <path stroke="currentColor" stroke-width="2"
+                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                </a>
+                                    </div>
+                                </td>
+                                @endif
                             </tr>
                         @endforeach
                     @else

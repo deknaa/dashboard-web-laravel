@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminTransactionController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,11 @@ Route::middleware('auth', 'adminRole')->group(function () {
     Route::resource('transaction', AdminController::class);
     Route::post('transaction/{id}/proses', [AdminController::class, 'process'])->name('admin.transaction.process');
     Route::post('transaction/{id}/tolak', [AdminController::class, 'reject'])->name('admin.transaction.reject');
+    Route::patch('/transactions/{id}/finish', [AdminController::class, 'finish'])->name('admin.transaction.finish');
+    Route::get('/admin/transactions/create', [AdminTransactionController::class, 'create'])->name('admin.transactions.create');
+    Route::post('/admin/transactions/store', [AdminTransactionController::class, 'store'])->name('admin.transactions.store');
+
+
     // CRUD untuk Ruang Kelas
     Route::resource('ruangkelas', RuangKelasController::class);
     // CRUD untuk Kendaraan

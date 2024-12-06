@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-dashboard.sidebar>
         <x-alert-information></x-alert-information>
-        <div class="flex justify-between items-center mt-10">
+        <div class="grid grid-cols-2 justify-between items-center mt-10">
             <h2 class="font-bold text-2xl">Manajemen Ruangan</h2>
             <a href="{{ route('ruangkelas.create') }}"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah
+                class="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-1 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah
                 Ruangan</a>
         </div>
 
@@ -78,17 +78,17 @@
                                 <td class="px-6 py-4">
                                     @if ($ruangan->status == 'active')
                                         <button type="button"
-                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Active</button>
+                                            class="flex items-center justify-center focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Active</button>
                                     @elseif($ruangan->status == 'not_active')
                                         <button type="button"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tidak Aktif</button>
+                                            class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tidak Aktif</button>
                                     @else
                                         <button type="button"
-                                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Disewa</button>
+                                            class="flex items-center justify-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Disewa</button>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="grid grid-cols-3 justify-items-center items-center">
+                                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
                                     <a href="{{ route('ruangkelas.show', $ruangan->id) }}"
                                         class="bg-green-500 hover:bg-green-600 text-gray-900 py-1 px-2 rounded"><svg
                                             class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
@@ -124,7 +124,7 @@
                                             </svg>
                                         </button>
                                     </form>
-                                </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

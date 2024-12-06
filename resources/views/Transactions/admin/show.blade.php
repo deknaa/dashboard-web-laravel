@@ -44,16 +44,19 @@
                     <div class="flex gap-2 items-center">
                         <label for="status"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                        @if ($transaksi->status == 'dalam_proses')
+                            @if ($transaksi->status == 'dalam_proses')
                             <button type="button"
-                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Pending</button>
-                        @elseif ($transaksi->status == 'selesai')
+                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Dalam Proses</button>
+                            @elseif($transaksi->status == 'selesai')
+                                <button type="button"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Selesai</button>
+                            @elseif($transaksi->status == 'disewa')
+                                <button type="button"
+                                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Disewa</button>
+                            @else
                             <button type="button"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Selesai</button>
-                        @else
-                            <button type="button"
-                                class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ditolak</button>
-                        @endif
+                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Ditolak</button>
+                            @endif
                     </div>
                 </div>
             </div>
@@ -98,24 +101,35 @@
         <h2 class="font-bold text-2xl mt-3">Proses Transaksi</h2>
         <div class="bg-white grid grid-cols-1 w-full h-auto mt-5 rounded-md p-5">
             <div>
-                {{-- form tolak transaksi --}}
+                {{-- form untuk menolak transaksi --}}
+                @if ($transaksi->status == 'dalam_proses')
                 <form id="rejectForm" action="{{ route('admin.transaction.reject', $transaksi->id) }}" method="POST" onsubmit="return validateRejectForm()">
                     @csrf
                     <small id="error-message" class="text-red-500 hidden">Harap isi alasan penolakan!</small>
                     <textarea id="alasan_tolak" rows="5"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Masukan Pesan Untuk User" name="alasan_tolak"></textarea>
-                    @if ($transaksi->status == 'dalam_proses')
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Masukan Pesan Untuk User" name="alasan_tolak"></textarea>
                     <button type="submit" class="mt-3 bg-red-500 text-white p-2 rounded">Tolak</button>
                 </form>
 
-                {{-- form proses transaksi --}}
+                {{-- form untuk memproses transaksi --}}
                 <form action="{{ route('admin.transaction.process', $transaksi->id) }}" method="POST">
                     @csrf
                     <button type="submit" class="mt-3 bg-green-500 text-white p-2 rounded">Proses</button>
                 </form>
-                @else
-                    <span></span>
+
+                @elseif ($transaksi->status == 'disewa')
+                {{-- form untuk menyelesaikan transaksi --}}
+                <form method="POST" action="{{ route('admin.transaction.finish', $transaksi->id) }}">
+                    @csrf
+                    @method('PATCH')
+                    <textarea id="optional_note" rows="5"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Catatan opsional (tidak wajib diisi)" name="catatan_opsional"></textarea>
+                    <button type="submit" class="mt-3 bg-green-500 text-white p-2 rounded">
+                        Selesaikan Transaksi
+                    </button>
+                </form>
                 @endif
             </div>
         </div>
