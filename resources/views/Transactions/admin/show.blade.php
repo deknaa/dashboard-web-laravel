@@ -6,9 +6,9 @@
 
         <hr class="h-[3px] my-8 bg-gray-200 border-0 dark:bg-gray-700 w-full">
 
-        <div class="bg-white grid grid-cols-1 w-full h-auto mt-5 rounded-md p-5">
-            <div class="grid grid-cols-3">
-                <div class="max-w-sm mt-3">
+        <div class="bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full h-auto mt-5 rounded-md p-5">
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="w-full mt-3">
                     <label for="jenis_transaksi"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Transaksi</label>
                     <select id="jenis_transaksi" name="jenis_transaksi" required
@@ -24,17 +24,16 @@
                         </option>
                     </select>
                 </div>
-                <div class="flex gap-5">
+                <div class="flex flex-col md:flex-row gap-5">
                     <div>
                         <label for="waktu_awal"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Waktu Awal</label>
                         <input type="datetime-local" name="waktu_awal" class="rounded"
                             value="{{ $transaksi->waktu_awal }}" disabled>
-                        <span class="ms-3">-</span>
                     </div>
                     <div>
                         <label for="waktu_akhir"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Waktu
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white md:mt-3">Waktu
                             Akhir</label>
                         <input type="datetime-local" name="waktu_akhir" class="rounded"
                             value="{{ $transaksi->waktu_akhir }}" disabled>
@@ -60,8 +59,8 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-3">
-                <div class="max-w-sm mt-3">
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="w-full mt-3">
                     <label for="product" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product</label>
                     @if ($transaksi->jenis_transaksi == 'ruang_kelas')
                         <input type="text" name="product"
@@ -125,7 +124,7 @@
                     @method('PATCH')
                     <textarea id="optional_note" rows="5"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Catatan opsional (tidak wajib diisi)" name="catatan_opsional"></textarea>
+                        placeholder="" name="catatan_opsional" disabled></textarea>
                     <button type="submit" class="mt-3 bg-green-500 text-white p-2 rounded">
                         Selesaikan Transaksi
                     </button>

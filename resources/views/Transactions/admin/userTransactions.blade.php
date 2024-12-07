@@ -124,7 +124,7 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="grid grid-cols-3 justify-items-center items-center">
+                                    <div class="flex flex-wrap gap-1 justify-items-center items-center">
                                     @if ($transaction->status == 'disewa')
                                     <a href="{{ route('transaction.show', $transaction->id) }}"
                                         class="bg-green-500 hover:bg-green-600 text-gray-900 py-1 px-2 rounded"><svg

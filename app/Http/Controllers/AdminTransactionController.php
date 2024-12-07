@@ -22,34 +22,37 @@ class AdminTransactionController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'jenis_transaksi' => 'required|in:ruang_kelas,kendaraan',
-            'ruang_kelas_id' => 'nullable|exists:ruangkelas,id',
-            'kendaraan_id' => 'nullable|exists:kendaraan,id',
-            'waktu_awal' => 'required|date',
-            'waktu_akhir' => 'required|date|after:waktu_awal',
-            'total_transaksi' => 'required|numeric',
             'catatan' => 'nullable|string',
             'bukti_pembayaran' => 'required|file|mimes:jpg,jpeg,png,pdf',
+            'waktu_awal' => 'required|date',
+            'waktu_akhir' => 'required|date|after:waktu_awal',
+            'user_id' => 'required|exists:users,id',
+            'ruang_kelas_id' => 'nullable|exists:ruangkelas,id',
+            'kendaraan_id' => 'nullable|exists:kendaraan,id',
+            'total_transaksi' => 'required|numeric',
+            'jenis_transaksi' => 'required|in:ruang_kelas,kendaraan',
         ]);
-
+    
         // Simpan bukti pembayaran jika diunggah
         if ($request->hasFile('bukti_pembayaran')) {
             $validated['bukti_pembayaran'] = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
         }
-
+    
         // Buat transaksi baru
-        Transaction::create([
-            'user_id' => $validated['user_id'],
-            'jenis_transaksi' => $validated['jenis_transaksi'],
-            'ruang_kelas_id' => $validated['ruang_kelas_id'] ?? null,
-            'kendaraan_id' => $validated['kendaraan_id'] ?? null,
-            'waktu_awal' => $validated['waktu_awal'],
-            'waktu_akhir' => $validated['waktu_akhir'],
-            'total_transaksi' => $validated['total_transaksi'],
+        $transaction = Transaction::create([
             'catatan' => $validated['catatan'] ?? null,
             'bukti_pembayaran' => $validated['bukti_pembayaran'] ?? null,
+            'waktu_awal' => $validated['waktu_awal'],
+            'waktu_akhir' => $validated['waktu_akhir'],
+            'user_id' => $validated['user_id'],
+            'ruang_kelas_id' => $validated['ruang_kelas_id'] ?? null,
+            'kendaraan_id' => $validated['kendaraan_id'] ?? null,
             'status' => 'dalam_proses',
+            'total_transaksi' => $validated['total_transaksi'],
+            'jenis_transaksi' => $validated['jenis_transaksi'],
         ]);
+    
+        // Redirect ke halaman lain dengan pesan sukses
+        return redirect()->route('admin.transactions.create')->with('success', 'Transaksi berhasil dibuat.');
     }
 }

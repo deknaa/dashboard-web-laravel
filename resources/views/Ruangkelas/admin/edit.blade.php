@@ -47,7 +47,7 @@
                         <option value="" {{ $ruangkelas->status == null ? 'selected' : '' }} disabled>Pilih Status</option>
                         <option value="active" {{ $ruangkelas->status == 'active' ? 'selected' : '' }}>Active</option>
                         <option value="not_active" {{ $ruangkelas->status == 'not_active' ? 'selected' : '' }}>Tidak Aktif</option>
-                        <option value="disewa" {{ $ruangkelas->status == null ? 'disewa' : '' }}>Disewa</option>
+                        <option value="disewa" {{ $ruangkelas->status == 'disewa' ? 'selected' : '' }}>Disewa</option>
                     </select>
                 </div>
                {{-- submit button --}}

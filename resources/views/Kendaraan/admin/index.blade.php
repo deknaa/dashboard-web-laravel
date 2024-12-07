@@ -1,12 +1,16 @@
 <x-app-layout>
     <x-dashboard.sidebar>
         <x-alert-information></x-alert-information>
-        <div class="flex justify-between items-center mt-10">
-            <h2 class="font-bold text-2xl">Manajemen kendaraan</h2>
+        <div class="grid grid-cols-2 items-center mt-10">
+            <h2 class="font-bold text-2xl">Manajemen Kendaraan</h2>
+            <div class="flex md:justify-end">
             <a href="{{ route('kendaraan.create') }}"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah
-                Kendaraan</a>
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full md:w-auto text-center">
+                Tambah Kendaraan
+            </a>
+            </div>
         </div>
+                
 
         <hr class="h-[3px] my-8 bg-gray-200 border-0 dark:bg-gray-700 w-full">
 
@@ -89,42 +93,42 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="grid grid-cols-3 justify-items-center items-center">
-                                        <a href="{{ route('kendaraan.show', $kendaraan->id) }}"
-                                            class="bg-green-500 hover:bg-green-600 text-gray-900 py-1 px-2 rounded"><svg
-                                                class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-width="2"
-                                                    d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                                <path stroke="currentColor" stroke-width="2"
-                                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                            </svg>
-                                        </a>
-                                        <a href="{{ route('kendaraan.edit', $kendaraan->id) }}"
-                                            class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-1 px-2 rounded"><svg
+                                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                                    <a href="{{ route('kendaraan.show', $kendaraan->id) }}"
+                                        class="bg-green-500 hover:bg-green-600 text-gray-900 py-1 px-2 rounded"><svg
+                                            class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-width="2"
+                                                d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                                            <path stroke="currentColor" stroke-width="2"
+                                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('kendaraan.edit', $kendaraan->id) }}"
+                                        class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-1 px-2 rounded"><svg
+                                            class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
+                                        </svg>
+                                    </a>
+                                    <form action="{{ route('kendaraan.destroy', $kendaraan->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-gray-900 py-1 px-2 rounded"><svg
                                                 class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="2"
-                                                    d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
+                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                             </svg>
-                                        </a>
-                                        <form action="{{ route('kendaraan.destroy', $kendaraan->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="bg-red-500 hover:bg-red-600 text-gray-900 py-1 px-2 rounded"><svg
-                                                    class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2"
-                                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                                </svg>
-                                            </button>
-                                        </form>
+                                        </button>
+                                    </form>
                                     </div>
                                 </td>
                             </tr>

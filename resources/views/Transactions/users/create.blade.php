@@ -3,11 +3,10 @@
         <h1 class="font-bold text-3xl mt-3">Tambah Transaksi</h1>
 
         <div class="bg-white grid grid-cols-1 w-full h-auto mt-5 rounded-md">
-            <form class="w-full p-5" action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="transactionForm" class="w-full p-5" action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="max-w-sm">
-                    <label for="jenis_transaksi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
-                        Transaksi</label>
+                    <label for="jenis_transaksi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Transaksi</label>
                     <select id="jenis_transaksi" name="jenis_transaksi" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="" selected disabled>Pilih Jenis Transaksi</option>
@@ -66,7 +65,7 @@
                 </div>
 
                 <div class="flex items-center justify-center mt-5">
-                    <button type="button" onclick="confirmSubmit()" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-10 py-2.5">Kirim</button>
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-10 py-2.5">Kirim</button>
                 </div>
             </form>
         </div>
