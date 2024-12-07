@@ -93,7 +93,8 @@ class KendaraanController extends Controller
         // Upload gambar baru jika ada
         if ($request->hasFile('gambar')) {
             // Hapus gambar lama jika ada
-            if ($kendaraan->gambar) {
+            if ($kendaraan->gambar)
+             {
                 Storage::disk('public')->delete($kendaraan->gambar);
             }
 

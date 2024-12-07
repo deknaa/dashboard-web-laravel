@@ -63,17 +63,32 @@ class UserDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.admin.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'nullable|string|max:255',
+            'nik' => 'nullable|string|max:255',
+            'email' => 'nullable|string|max:255',
+            'no_telp' => 'nullable|string|max:255',
+            'status' => 'nullable|in:active,not_active',
+            'role' => 'nullable|in:admin,user',
+            'password' => 'nullable|min:8',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->update($validated);
+
+        return redirect()->route('users.index')->with('success', "User dengan nama {$request->nama} berhasil diedit.");
     }
 
     /**
