@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="flex items-center justify-center mt-5">
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-10 py-2.5">Kirim</button>
+                    <button type="submit" onclick="return confirm('Apakah anda yakin membuat transaksi ini?')" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-10 py-2.5">Kirim</button>
                 </div>
             </form>
         </div>

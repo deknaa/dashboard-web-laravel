@@ -140,7 +140,7 @@
                                     <form method="POST" action="{{ route('admin.transaction.finish', $transaction->id) }}">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
+                                        <button type="submit" onclick="return confirm('Apakah anda yakin selesaikan transaksi ini?')" class="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded">
                                             <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
                                               </svg>                                              
