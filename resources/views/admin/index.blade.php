@@ -39,6 +39,9 @@
                             Nama
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            NIM
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Tipe Transaksi
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -78,6 +81,9 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $transaction->user->nama }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $transaction->user->nim }}
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($transaction->jenis_transaksi == 'ruang_kelas')

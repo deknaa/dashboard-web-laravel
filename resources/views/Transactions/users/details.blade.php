@@ -7,7 +7,7 @@
         <hr class="h-[3px] my-8 bg-gray-200 border-0 dark:bg-gray-700 w-full">
 
         <div class="bg-white grid grid-cols-1 w-full h-auto mt-5 rounded-md p-5">
-            <div class="grid grid-cols-3">
+            <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class="max-w-sm mt-3">
                     <label for="jenis_transaksi"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Transaksi</label>
@@ -23,22 +23,6 @@
                             Sewa Kendaraan
                         </option>
                     </select>
-                </div>
-                <div class="flex gap-5">
-                    <div>
-                        <label for="waktu_awal"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Waktu Awal</label>
-                        <input type="datetime-local" name="waktu_awal" class="rounded"
-                            value="{{ $transaksi->waktu_awal }}" disabled>
-                        <span class="ms-3">-</span>
-                    </div>
-                    <div>
-                        <label for="waktu_akhir"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Waktu
-                            Akhir</label>
-                        <input type="datetime-local" name="waktu_akhir" class="rounded"
-                            value="{{ $transaksi->waktu_akhir }}" disabled>
-                    </div>
                 </div>
                 <div class="max-w-sm mt-3">
                     <div class="flex gap-2 items-center">
@@ -60,7 +44,23 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-3">
+            <div class="flex flex-col md:flex-row gap-5">
+                <div>
+                    <label for="waktu_awal"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Waktu Awal</label>
+                    <input type="datetime-local" name="waktu_awal" class="rounded"
+                        value="{{ $transaksi->waktu_awal }}" disabled>
+                    <span class="ms-3 hidden md:inline">-</span>
+                </div>
+                <div>
+                    <label for="waktu_akhir"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3">Waktu
+                        Akhir</label>
+                    <input type="datetime-local" name="waktu_akhir" class="rounded"
+                        value="{{ $transaksi->waktu_akhir }}" disabled>
+                </div>
+            </div>
+            <div class="grid grid-cols-1">
                 <div class="max-w-sm mt-3">
                     <label for="product" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product</label>
                     @if ($transaksi->jenis_transaksi == 'ruang_kelas')

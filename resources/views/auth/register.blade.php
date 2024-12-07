@@ -17,9 +17,9 @@
 
         <!-- NIK -->
         <div>
-            <x-input-label for="nik" :value="__('NIK')" class="mb-3" />
-            <x-text-input id="nik" class="block mt-1 w-full" type="number" name="nik" :value="old('nik')" required autofocus autocomplete="nik" />
-            <x-input-error :messages="$errors->get('nik')" class="mt-2 mb-2" />
+            <x-input-label for="nim" :value="__('NIM')" class="mb-3" />
+            <x-text-input id="nim" class="block mt-1 w-full" type="number" name="nim" :value="old('nim')" required autofocus autocomplete="nim" />
+            <x-input-error :messages="$errors->get('nim')" class="mt-2 mb-2" />
         </div> 
 
         <!-- Email Address -->

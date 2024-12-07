@@ -15,8 +15,8 @@
                         class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
                 <div class="max-w-sm mt-3">
-                    <label for="nik" class="block text-gray-700 font-bold">NIK:</label>
-                    <input type="number" id="nik" name="nik" value="{{ $user->nik }}"
+                    <label for="nim" class="block text-gray-700 font-bold">NIM:</label>
+                    <input type="number" id="nim" name="nim" value="{{ $user->nim }}"
                         class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
                 <div class="max-w-sm mt-3">
@@ -35,8 +35,8 @@
                     <select id="status" name="status" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="" selected disabled>Pilih Status</option>
-                        <option value="active">Active</option>
-                        <option value="not_active">Tidak Aktif</option>
+                        <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Active</option>
+                        <option value="not_active" {{ $user->status == 'not_active' ? 'selected' : '' }}>Tidak Aktif</option>
                     </select>
                 </div>
                 <div class="max-w-sm mt-3">
@@ -45,8 +45,8 @@
                     <select id="role" name="role" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="" selected disabled>Pilih role</option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
+                        <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
                     </select>
                 </div>
                 <div class="max-w-sm mt-3">

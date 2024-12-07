@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'nama' => "Admin",
             'email' => "admin@gmail.com",
-            'nik' => "123456789",
+            'nim' => "123456789",
             'no_telp' => "123456789",
             'status' => "active",
             'role' => "admin",
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'nama' => "Dekna",
             'email' => "dekna@gmail.com",
-            'nik' => "1249341",
+            'nim' => "1249341",
             'no_telp' => "1231231",
             'status' => "active",
             'role' => "user",

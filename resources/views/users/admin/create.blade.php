@@ -14,8 +14,8 @@
                         class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
                 <div class="max-w-sm mt-3">
-                    <label for="nik" class="block text-gray-700 font-bold">NIK:</label>
-                    <input type="number" id="nik" name="nik" value="{{ old('nik') }}"
+                    <label for="nim" class="block text-gray-700 font-bold">NIM:</label>
+                    <input type="number" id="nim" name="nim" value="{{ old('nim') }}"
                         class="w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
                 <div class="max-w-sm mt-3">

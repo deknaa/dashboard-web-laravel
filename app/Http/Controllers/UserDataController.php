@@ -32,7 +32,7 @@ class UserDataController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'nik' => 'required|string|max:255',
+            'nim' => 'required|string|max:255',
             'email' => 'required|string|max:255',
             'no_telp' => 'required|string|max:255',
             'status' => 'required|in:active,not_active',
@@ -42,7 +42,7 @@ class UserDataController extends Controller
 
         User::create([
             'nama' => $request->nama,
-            'nik' => $request->nik,
+            'nim' => $request->nim,
             'email' => $request->email,
             'no_telp' => $request->no_telp,
             'role' => $request->role,
@@ -76,7 +76,7 @@ class UserDataController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'nullable|string|max:255',
-            'nik' => 'nullable|string|max:255',
+            'nim' => 'nullable|string|max:255',
             'email' => 'nullable|string|max:255',
             'no_telp' => 'nullable|string|max:255',
             'status' => 'nullable|in:active,not_active',

@@ -18,7 +18,7 @@
                             No
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            NIK
+                            NIM
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Nama
@@ -47,7 +47,7 @@
                                     {{ $loop->iteration }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $user->id }}
+                                    {{ $user->nim }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $user->nama }}
