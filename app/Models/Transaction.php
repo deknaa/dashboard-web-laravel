@@ -11,6 +11,7 @@ class Transaction extends Model
         'jenis_transaksi',
         'catatan',
         'bukti_pembayaran',
+        'bukti_surat',
         'waktu_awal',
         'waktu_akhir',
         'user_id',

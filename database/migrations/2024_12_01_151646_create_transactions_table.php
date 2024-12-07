@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->enum('jenis_transaksi', ['ruang_kelas', 'kendaraan']);
             $table->string('catatan')->nullable(); 
-            $table->string('bukti_pembayaran'); 
+            $table->string('bukti_pembayaran')->nullable(); 
+            $table->string('bukti_surat')->nullable(); 
             $table->dateTime('waktu_awal'); 
             $table->dateTime('waktu_akhir'); 
             $table->unsignedBigInteger('user_id');

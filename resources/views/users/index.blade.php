@@ -42,7 +42,10 @@
                             Item
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Surat
+                            Bukti Surat
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Bukti Pembayaran
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Tanggal Sewa
@@ -88,22 +91,22 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    @if ($transaction->bukti_pembayaran)
+                                    @if ($transaction->bukti_surat)
                                         @php
                                             // Dapatkan ekstensi file
                                             $extension = pathinfo(
-                                                storage_path('app/public/' . $transaction->bukti_pembayaran),
+                                                storage_path('app/public/' . $transaction->bukti_surat),
                                                 PATHINFO_EXTENSION,
                                             );
                                         @endphp
 
                                         @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
                                             {{-- Jika file berupa gambar --}}
-                                            <img src="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
+                                            <img src="{{ asset('storage/' . $transaction->bukti_surat) }}"
                                                 alt="Bukti Pembayaran" class="w-24 h-auto">
                                         @elseif ($extension === 'pdf')
                                             {{-- Jika file berupa PDF --}}
-                                            <a href="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
+                                            <a href="{{ asset('storage/' . $transaction->bukti_surat) }}"
                                                 target="_blank" class="text-blue-500 underline">
                                                 Lihat Bukti Pembayaran (PDF)
                                             </a>
@@ -111,7 +114,38 @@
                                             <p>Format bukti pembayaran tidak dikenali.</p>
                                         @endif
                                     @else
-                                        <p>Bukti pembayaran/Surat belum diunggah.</p>
+                                        <p>Bukti Surat belum diunggah.</p>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    @if($transaction->jenis_transaksi == 'ruang_kelas')
+                                        @if ($transaction->bukti_pembayaran)
+                                            @php
+                                                // Dapatkan ekstensi file
+                                                $extension = pathinfo(
+                                                    storage_path('app/public/' . $transaction->bukti_pembayaran),
+                                                    PATHINFO_EXTENSION,
+                                                );
+                                            @endphp
+
+                                            @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                                {{-- Jika file berupa gambar --}}
+                                                <img src="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
+                                                    alt="Bukti Pembayaran" class="w-24 h-auto">
+                                            @elseif ($extension === 'pdf')
+                                                {{-- Jika file berupa PDF --}}
+                                                <a href="{{ asset('storage/' . $transaction->bukti_pembayaran) }}"
+                                                    target="_blank" class="text-blue-500 underline">
+                                                    Lihat Bukti Pembayaran (PDF)
+                                                </a>
+                                            @else
+                                                <p>Format bukti surat tidak dikenali.</p>
+                                            @endif
+                                        @else
+                                            <p>Bukti pembayaran belum diunggah.</p>
+                                        @endif
+                                    @else
+                                        <p>Tidak Perlu Bukti Pembayaran</p>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">

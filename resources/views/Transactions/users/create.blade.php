@@ -52,9 +52,14 @@
                         class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 </div>
 
-                <div class="max-w-sm mt-3">
+                <div class="max-w-sm mt-3" style="display: none;" id="bukti_pembayaranInput">
                     <label for="bukti_pembayaran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Bukti Pembayaran</label>
-                    <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" required 
+                    <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" 
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400">
+                </div>
+                <div class="max-w-sm mt-3" style="display: none;" id="bukti_suratInput">
+                    <label for="bukti_surat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Bukti Surat</label>
+                    <input type="file" id="bukti_surat" name="bukti_surat" 
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400">
                 </div>
 
@@ -77,13 +82,19 @@
             const waktuAwal = document.getElementById('waktu_awal');
             const waktuAkhir = document.getElementById('waktu_akhir');
             const totalHargaInput = document.getElementById('total_harga');
+            const buktiPembayaranInput = document.getElementById('bukti_pembayaranInput');
+            const buktiSuratInput = document.getElementById('bukti_suratInput');
 
             jenisTransaksi.addEventListener('change', function () {
                 if (this.value === 'ruang_kelas') {
                     ruangKelasSelect.style.display = 'block';
+                    buktiPembayaranInput.style.display = 'block';
+                    buktiSuratInput.style.display = 'block';
                     kendaraanSelect.style.display = 'none';
                 } else if (this.value === 'kendaraan') {
                     ruangKelasSelect.style.display = 'none';
+                    buktiPembayaranInput.style.display = 'none';
+                    buktiSuratInput.style.display = 'block';
                     kendaraanSelect.style.display = 'block';
                 }
                 totalHargaInput.value = ''; // Reset total harga saat jenis transaksi berubah
@@ -112,21 +123,6 @@
             waktuAkhir.addEventListener('change', calculateTotalHarga);
             document.getElementById('ruang_kelas_id')?.addEventListener('change', calculateTotalHarga);
             document.getElementById('kendaraan_id')?.addEventListener('change', calculateTotalHarga);
-
-            function confirmSubmit() {
-                Swal.fire({
-                    title: 'Apakah Anda yakin?',
-                    text: 'Pastikan semua data sudah benar sebelum mengirim!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, Kirim!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById('transactionForm').submit();
-                    }
-                });
-            }
         </script>
     </x-dashboard.sidebar>
 </x-app-layout>

@@ -64,7 +64,8 @@ class TransactionController extends Controller
             'jenis_transaksi' => 'required|in:ruang_kelas,kendaraan',
             'waktu_awal' => 'required|date',
             'waktu_akhir' => 'required|date|after:waktu_awal',
-            'bukti_pembayaran' => 'required|file|mimes:png,jpg,jpeg,pdf|max:3072',
+            'bukti_pembayaran' => 'nullable|file|mimes:png,jpg,jpeg,pdf|max:3072',
+            'bukti_surat' => 'nullable|file|mimes:png,jpg,jpeg,pdf|max:3072',
             'catatan' => 'nullable|string',
             'ruang_kelas_id' => 'required_if:jenis_transaksi,ruang_kelas|nullable|exists:ruangkelas,id',
             'kendaraan_id' => 'required_if:jenis_transaksi,kendaraan|nullable|exists:kendaraan,id',
@@ -74,7 +75,12 @@ class TransactionController extends Controller
             'user_id' => Auth::user()->id,
             'waktu_awal' => $request->waktu_awal,
             'waktu_akhir' => $request->waktu_akhir,
-            'bukti_pembayaran' => $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public'),
+            'bukti_pembayaran' => $request->file('bukti_pembayaran') 
+                                ? $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public') 
+                                : null,
+            'bukti_surat' => $request->file('bukti_surat')
+                            ? $request->file('bukti_surat')->store('bukti_surat', 'public') 
+                            : null,
             'catatan' => $request->catatan,
             'status' => 'dalam_proses',
         ];

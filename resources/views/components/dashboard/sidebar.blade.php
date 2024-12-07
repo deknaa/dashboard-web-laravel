@@ -165,7 +165,7 @@
                 <li>
                     <a href="{{ route('transactions.history') }}"
                         class="flex items-center p-2 rounded-lg group 
-                    {{ request()->routeIs('transactions.history') ? 'bg-blue-100 text-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }}">
+                    {{ request()->routeIs('transactions.history') || request()->routeIs('transactions.create') ? 'bg-blue-100 text-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }}">
                         <svg class="w-6 h-6" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
