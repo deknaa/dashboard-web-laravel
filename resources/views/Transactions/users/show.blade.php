@@ -40,6 +40,9 @@
                         <th scope="col" class="px-6 py-3">
                             Status
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Aksi
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,6 +121,22 @@
                                     <button type="button"
                                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Ditolak</button>
                                     @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="{{ route('transactions.details', $transaction) }}">
+                                        <div
+                                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 flex items-center gap-1">
+                                            <svg class="w-6 h-6 text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-width="2"
+                                                    d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                                                <path stroke="currentColor" stroke-width="2"
+                                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                            </svg>
+                                            <span>Lihat Detail</span>
+                                        </div>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
