@@ -6,8 +6,8 @@
 
         <hr class="h-[3px] my-8 bg-gray-200 border-0 dark:bg-gray-700 w-full">
 
-        <div class="bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full h-auto mt-5 rounded-md p-5">
-            <div class="grid grid-cols-1 md:grid-cols-3">
+        <div class="bg-white grid grid-cols-1 w-full h-auto mt-5 rounded-md p-5">
+            <div class="grid grid-cols-1 md:grid-cols-1">
                 <div class="w-full mt-3">
                     <label for="jenis_transaksi"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Transaksi</label>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3">
+            <div class="grid gap-2 grid-cols-1 md:grid-cols-2">
                 <div class="w-full mt-3">
                     <label for="product" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product</label>
                     @if ($transaksi->jenis_transaksi == 'ruang_kelas')

@@ -34,8 +34,6 @@ Route::middleware('auth', 'adminRole')->group(function () {
     Route::post('transaction/{id}/proses', [AdminController::class, 'process'])->name('admin.transaction.process');
     Route::post('transaction/{id}/tolak', [AdminController::class, 'reject'])->name('admin.transaction.reject');
     Route::patch('/transactions/{id}/finish', [AdminController::class, 'finish'])->name('admin.transaction.finish');
-    Route::get('/admin/transactions/create', [TransactionController::class, 'createByAdmin'])->name('admin.transactions.create');
-    Route::post('/admin/transactions/store', [TransactionController::class, 'storeByAdmin'])->name('admin.transactions.store');
 
 
     // CRUD untuk Ruang Kelas
